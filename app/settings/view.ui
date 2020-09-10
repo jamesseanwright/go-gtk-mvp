@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <object class="GtkBox" id="root">
-    <property name="orientation">vertical</property>
-    <child>
-      <object class="GtkLabel">
-        <property name="label">Settings!</property>
-      </object>
-      <packing>
-        <property name="expand">true</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkButton" id="back-button">
-        <property name="label">Back</property>
-      </object>
-    </child>
-  </object>
+	<object class="GtkBox" id="root">
+		<property name="orientation">vertical</property>
+		<child>
+			<object class="GtkLabel">
+				<property name="label">Settings!</property>
+			</object>
+			<packing>
+				<property name="expand">true</property>
+			</packing>
+		</child>
+		<child>
+			<object class="GtkButton" id="back-button">
+				<property name="label">Back</property>
+			</object>
+		</child>
+	</object>
 </interface>
