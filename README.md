@@ -5,6 +5,7 @@ A GTK app, written in Go, that follows the model-view-presenter pattern. I'm bui
 ## Project Layout
 
 ```
+.
 ├── app => the views, presenters, and models organised by feature
 │   ├── index => the main view
 │   │   ├── presenter.go => glue between the view and the model
