@@ -12,7 +12,7 @@ type View interface {
 }
 
 type Presenter interface {
-	Bind(view *View) error
+	Bind(view View) error
 }
 
 type Navigator struct {
