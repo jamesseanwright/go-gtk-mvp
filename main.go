@@ -25,12 +25,12 @@ func main() {
 
 	navigator := framework.NewNavigator(win)
 
-	presenters := map[string]framework.Presenter{
-		"index":    index.NewPresenter(&navigator),
-		"settings": settings.NewPresenter(&navigator),
+	views := map[string]framework.View{
+		"index":    index.NewView(index.NewPresenter(&navigator)),
+		"settings": settings.NewView(settings.NewPresenter(&navigator)),
 	}
 
-	navigator.SetPresenters(presenters)
+	navigator.SetViews(views)
 
 	navigator.Navigate("index")
 

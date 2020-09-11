@@ -7,35 +7,39 @@ import (
 	"github.com/gotk3/gotk3/gtk"
 )
 
-type Presenter interface {
+type View interface {
 	Bind(builder *gtk.Builder) error
 }
 
+type Presenter interface {
+	Bind(view *View) error
+}
+
 type Navigator struct {
-	window     *gtk.Window
-	presenters map[string]Presenter
+	window *gtk.Window
+	views  map[string]View
 }
 
 func NewNavigator(window *gtk.Window) Navigator {
 	return Navigator{
-		window:     window,
-		presenters: make(map[string]Presenter),
+		window: window,
+		views:  make(map[string]View),
 	}
 }
 
 // Having to set later due to circular instantiation problem
-func (n *Navigator) SetPresenters(presenters map[string]Presenter) {
-	n.presenters = presenters
+func (n *Navigator) SetViews(views map[string]View) {
+	n.views = views
 }
 
 func (n *Navigator) Navigate(viewName string) {
 	var err error
 
-	presenter, hasPresenter := n.presenters[viewName]
+	view, hasView := n.views[viewName]
 
-	if !hasPresenter {
+	if !hasView {
 		// TODO: return errors instead!
-		log.Fatalf("Unable to locate view model %s", viewName)
+		log.Fatalf("Unable to locate view %s", viewName)
 		return
 	}
 
@@ -50,7 +54,7 @@ func (n *Navigator) Navigate(viewName string) {
 		return
 	}
 
-	err = presenter.Bind(builder)
+	err = view.Bind(builder)
 
 	if err != nil {
 		log.Fatalf("Unable to navigate to view %s: %s", viewName, err)
@@ -62,6 +66,5 @@ func (n *Navigator) Navigate(viewName string) {
 	}
 
 	n.window.Add(rootWidget)
-	n.window.SetDefaultSize(640, 480)
 	n.window.ShowAll()
 }
