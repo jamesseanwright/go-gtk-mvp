@@ -7,17 +7,17 @@ import (
 	"james.engineering/hello-go-gtk/framework"
 )
 
-type SettingsViewModel struct {
+type SettingsPresenter struct {
 	navigator *framework.Navigator
 }
 
-func NewViewModel(navigator *framework.Navigator) SettingsViewModel {
-	return SettingsViewModel{
+func NewPresenter(navigator *framework.Navigator) SettingsPresenter {
+	return SettingsPresenter{
 		navigator,
 	}
 }
 
-func (vm SettingsViewModel) Bind(builder *gtk.Builder) error {
+func (p SettingsPresenter) Bind(builder *gtk.Builder) error {
 	var err error
 
 	backButtonObj, err := builder.GetObject("back-button")
@@ -28,7 +28,7 @@ func (vm SettingsViewModel) Bind(builder *gtk.Builder) error {
 	}
 
 	backButton.Connect("clicked", func() {
-		vm.navigator.Navigate("index")
+		p.navigator.Navigate("index")
 	})
 
 	return err

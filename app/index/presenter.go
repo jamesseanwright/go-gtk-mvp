@@ -7,17 +7,17 @@ import (
 	"james.engineering/hello-go-gtk/framework"
 )
 
-type MainViewModel struct {
+type MainPresenter struct {
 	navigator *framework.Navigator
 }
 
-func NewViewModel(navigator *framework.Navigator) MainViewModel {
-	return MainViewModel{
+func NewPresenter(navigator *framework.Navigator) MainPresenter {
+	return MainPresenter{
 		navigator,
 	}
 }
 
-func (vm MainViewModel) Bind(builder *gtk.Builder) error {
+func (presenter MainPresenter) Bind(builder *gtk.Builder) error {
 	var err error
 
 	settingsButtonObj, err := builder.GetObject("settings-button")
@@ -28,7 +28,7 @@ func (vm MainViewModel) Bind(builder *gtk.Builder) error {
 	}
 
 	settingsButton.Connect("clicked", func() {
-		vm.navigator.Navigate("settings")
+		presenter.navigator.Navigate("settings")
 	})
 
 	return err

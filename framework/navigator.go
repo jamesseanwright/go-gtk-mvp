@@ -7,33 +7,33 @@ import (
 	"github.com/gotk3/gotk3/gtk"
 )
 
-type ViewModel interface {
+type Presenter interface {
 	Bind(builder *gtk.Builder) error
 }
 
 type Navigator struct {
 	window     *gtk.Window
-	viewModels map[string]ViewModel
+	presenters map[string]Presenter
 }
 
 func NewNavigator(window *gtk.Window) Navigator {
 	return Navigator{
 		window:     window,
-		viewModels: make(map[string]ViewModel),
+		presenters: make(map[string]Presenter),
 	}
 }
 
 // Having to set later due to circular instantiation problem
-func (n *Navigator) SetViewModels(viewModels map[string]ViewModel) {
-	n.viewModels = viewModels
+func (n *Navigator) SetPresenters(presenters map[string]Presenter) {
+	n.presenters = presenters
 }
 
 func (n *Navigator) Navigate(viewName string) {
 	var err error
 
-	viewModel, hasViewModel := n.viewModels[viewName]
+	presenter, hasPresenter := n.presenters[viewName]
 
-	if !hasViewModel {
+	if !hasPresenter {
 		// TODO: return errors instead!
 		log.Fatalf("Unable to locate view model %s", viewName)
 		return
@@ -50,7 +50,7 @@ func (n *Navigator) Navigate(viewName string) {
 		return
 	}
 
-	err = viewModel.Bind(builder)
+	err = presenter.Bind(builder)
 
 	if err != nil {
 		log.Fatalf("Unable to navigate to view %s: %s", viewName, err)
