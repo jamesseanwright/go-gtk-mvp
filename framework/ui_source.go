@@ -8,7 +8,8 @@ import (
 
 type UiSource interface {
 	RegisterEvent(controlName, eventName string, handler func()) error
-	SetLabelText(controlName, text string) error
+	SetImageProperty(controlName, prop string, value interface{}) error
+	SetLabelProperty(controlName, prop string, value interface{}) error
 }
 
 type GtkUiSource struct {
@@ -19,18 +20,38 @@ func NewGtkUiSource(builder *gtk.Builder) GtkUiSource {
 	return GtkUiSource{builder}
 }
 
-func (s GtkUiSource) SetLabelText(controlName, text string) error {
+/* gotk3 seemingly doesn't support common
+ * property operations on *gtk.Widget, hence we
+ * need generic setter functions per type :(
+ * TODO: share code between setters */
+func (s GtkUiSource) SetImageProperty(controlName, prop string, value interface{}) error {
 	var err error
 
 	obj, err := s.builder.GetObject(controlName)
 
-	label, isLabel := obj.(*gtk.Label)
+	widget, isWidget := obj.(*gtk.Image)
 
-	if !isLabel {
+	if !isWidget {
+		err = fmt.Errorf("%s is not a GTK image", controlName)
+	}
+
+	widget.SetProperty(prop, value)
+
+	return err
+}
+
+func (s GtkUiSource) SetLabelProperty(controlName, prop string, value interface{}) error {
+	var err error
+
+	obj, err := s.builder.GetObject(controlName)
+
+	widget, isWidget := obj.(*gtk.Label)
+
+	if !isWidget {
 		err = fmt.Errorf("%s is not a GTK label", controlName)
 	}
 
-	label.SetLabel(text)
+	widget.SetProperty(prop, value)
 
 	return err
 }

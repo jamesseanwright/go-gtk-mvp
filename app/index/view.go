@@ -27,6 +27,8 @@ func (v MainView) RegisterSettingsNavigationHandler(handler func()) error {
 	return v.uiSource.RegisterEvent("settings-button", "clicked", handler)
 }
 
-func (v MainView) SetQuoteText(quote string) {
-	v.uiSource.SetLabelText("quote", quote)
+func (v MainView) DisplayQuote(quote string) {
+	v.uiSource.SetLabelProperty("quote", "label", quote)
+	v.uiSource.SetImageProperty("loading-spinner", "visible", false)
+	v.uiSource.SetLabelProperty("quote", "visible", true)
 }

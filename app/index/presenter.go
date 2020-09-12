@@ -20,7 +20,7 @@ func (p MainPresenter) Bind(view MainView) error {
 
 	go func() {
 		quote := <-quoteChan
-		view.SetQuoteText(quote)
+		view.DisplayQuote(quote)
 	}()
 
 	return view.RegisterSettingsNavigationHandler(func() {
