@@ -1,0 +1,14 @@
+.loading-spinner {
+	animation: 3s linear 0s infinite rotate;
+}
+
+@keyframes rotate {
+  from {
+    -gtk-icon-transform: rotate(0deg);
+  }
+
+  to {
+    -gtk-icon-transform: rotate(360deg);
+  }
+}
+

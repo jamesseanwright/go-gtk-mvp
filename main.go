@@ -23,6 +23,18 @@ func main() {
 
 	win.SetDefaultSize(640, 480)
 
+	cssProvider, err := gtk.CssProviderNew()
+	err = cssProvider.LoadFromPath("app/style.css")
+	screen := win.GetScreen()
+
+	/* TODO: gtk.RemoveProviderForScreen() or just
+	 * use one stylesheet for entire application */
+	gtk.AddProviderForScreen(
+		screen,
+		cssProvider,
+		gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
+	)
+
 	navigator := framework.NewNavigator(win)
 
 	views := map[string]framework.View{
