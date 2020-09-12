@@ -27,8 +27,6 @@ func main() {
 	err = cssProvider.LoadFromPath("app/style.css")
 	screen := win.GetScreen()
 
-	/* TODO: gtk.RemoveProviderForScreen() or just
-	 * use one stylesheet for entire application */
 	gtk.AddProviderForScreen(
 		screen,
 		cssProvider,
