@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// TODO: return error channel
 func FetchSwansonQuote() chan string {
 	var quotes []string
 	quoteChan := make(chan string)
