@@ -26,3 +26,7 @@ func (v MainView) Bind(builder *gtk.Builder) error {
 func (v MainView) RegisterSettingsNavigationHandler(handler func()) error {
 	return v.uiSource.RegisterEvent("settings-button", "clicked", handler)
 }
+
+func (v MainView) SetQuoteText(quote string) {
+	v.uiSource.SetLabelText("quote", quote)
+}

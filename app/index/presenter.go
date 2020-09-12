@@ -2,6 +2,7 @@ package index
 
 import (
 	"james.engineering/hello-go-gtk/framework"
+	"james.engineering/hello-go-gtk/services"
 )
 
 type MainPresenter struct {
@@ -15,6 +16,13 @@ func NewPresenter(navigator *framework.Navigator) MainPresenter {
 }
 
 func (p MainPresenter) Bind(view MainView) error {
+	quoteChan := services.FetchSwansonQuote()
+
+	go func() {
+		quote := <-quoteChan
+		view.SetQuoteText(quote)
+	}()
+
 	return view.RegisterSettingsNavigationHandler(func() {
 		p.navigator.Navigate("settings")
 	})
