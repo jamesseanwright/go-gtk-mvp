@@ -18,6 +18,7 @@ A GTK app, written in Go, that follows the model-view-presenter pattern. I'm bui
 ├── framework => model-view-presenter framework
 │   ├── navigator.go => updates the window with the requested view
 │   └── ui_source.go => provides methods for querying and modifying GTK views in an abstract and isolated manner
+├── services => integrations with external dependencies
 ├── go.mod
 ├── go.sum
 ├── main.go => program entry point
