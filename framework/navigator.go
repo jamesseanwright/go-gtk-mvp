@@ -44,6 +44,9 @@ func (n *Navigator) Navigate(viewName string) {
 	}
 
 	currentRoot, err := n.window.GetChild()
+
+	// TODO: loaders for resource pack and file
+	// system for production and dev respectively
 	builder, err := gtk.BuilderNewFromResource(fmt.Sprintf("/engineering/james/hello-go-gtk/app/%s/view.ui", viewName))
 	rootObject, err := builder.GetObject("root")
 	rootWidget, isRootValid := rootObject.(gtk.IWidget)
