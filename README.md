@@ -34,12 +34,7 @@ TODO
 Once GTK 3 is present on your machine:
 
 ```sh
-$ go build main.go
+$ make build
+$ cd dist
 $ ./main
-```
-
-Or simply:
-
-```sh
-$ go run main.go
 ```
