@@ -3,16 +3,31 @@ package main
 import (
 	"log"
 
+	"github.com/gotk3/gotk3/gio"
 	"github.com/gotk3/gotk3/gtk"
 	"james.engineering/hello-go-gtk/app/index"
 	"james.engineering/hello-go-gtk/app/settings"
 	"james.engineering/hello-go-gtk/framework"
 )
 
+func registerResources() error {
+	gresource, err := gio.LoadGResource("resources")
+
+	if err != nil {
+		return err
+	}
+
+	gio.RegisterGResource(gresource)
+
+	return err
+}
+
 func main() {
 	gtk.Init(nil)
 
 	var err error
+
+	err = registerResources()
 
 	win, err := gtk.WindowNew(gtk.WINDOW_TOPLEVEL)
 	win.SetTitle("Hello GTK")

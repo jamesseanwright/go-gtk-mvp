@@ -44,7 +44,7 @@ func (n *Navigator) Navigate(viewName string) {
 	}
 
 	currentRoot, err := n.window.GetChild()
-	builder, err := gtk.BuilderNewFromFile(fmt.Sprintf("app/%s/view.ui", viewName))
+	builder, err := gtk.BuilderNewFromResource(fmt.Sprintf("/engineering/james/hello-go-gtk/app/%s/view.ui", viewName))
 	rootObject, err := builder.GetObject("root")
 	rootWidget, isRootValid := rootObject.(gtk.IWidget)
 
