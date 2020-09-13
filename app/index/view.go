@@ -28,7 +28,7 @@ func (v MainView) RegisterSettingsNavigationHandler(handler func()) error {
 }
 
 func (v MainView) DisplayQuote(quote string) {
-	v.uiSource.SetLabelProperty("quote", "label", quote)
-	v.uiSource.SetImageProperty("loading-spinner", "visible", false)
-	v.uiSource.SetLabelProperty("quote", "visible", true)
+	v.uiSource.SetProperty("quote", "label", quote)
+	v.uiSource.SetProperty("loading-spinner", "visible", false)
+	v.uiSource.SetProperty("quote", "visible", true)
 }
