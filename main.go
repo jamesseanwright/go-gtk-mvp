@@ -39,7 +39,9 @@ func main() {
 	win.SetDefaultSize(640, 480)
 
 	cssProvider, err := gtk.CssProviderNew()
-	err = cssProvider.LoadFromPath("app/style.css")
+
+	// TODO: see similar TODO in navigator.go and address
+	cssProvider.LoadFromResource("/engineering/james/hello-go-gtk/app/style.css")
 	screen := win.GetScreen()
 
 	gtk.AddProviderForScreen(

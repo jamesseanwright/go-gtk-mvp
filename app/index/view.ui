@@ -4,7 +4,7 @@
 		<property name="orientation">vertical</property>
 		<child>
 			<object class="GtkImage" id="loading-spinner">
-				<property name="file">images/spinner.png</property>
+				<property name="resource">/engineering/james/hello-go-gtk/images/spinner.png</property>
 				<property name="visible">true</property>
 				<style>
 					<class name="loading-spinner" />

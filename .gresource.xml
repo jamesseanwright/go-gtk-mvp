@@ -3,5 +3,7 @@
   <gresource prefix="/engineering/james/hello-go-gtk">
     <file preprocess="xml-stripblanks">app/index/view.ui</file>
     <file preprocess="xml-stripblanks">app/settings/view.ui</file>
+    <file>app/style.css</file>
+    <file>images/spinner.png</file>
   </gresource>
 </gresources>
